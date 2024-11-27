@@ -1,4 +1,4 @@
-package com.coding2themax.dog.boardgame.store;
+package com.coding2themax.boardgame.store;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
