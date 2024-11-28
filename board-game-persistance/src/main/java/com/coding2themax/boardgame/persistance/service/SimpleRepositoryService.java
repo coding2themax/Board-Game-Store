@@ -1,10 +1,13 @@
 package com.coding2themax.boardgame.persistance.service;
 
+import org.springframework.stereotype.Service;
+
 import com.coding2themax.boardgame.persistance.model.BoardGame;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class SimpleRepositoryService implements BookInventoryService {
 
   @Override
@@ -36,12 +39,19 @@ public class SimpleRepositoryService implements BookInventoryService {
 
     BoardGame boardGame = new BoardGame();
     boardGame.setId(1);
-    boardGame.setName("Catan");
+    boardGame.setName("Catan - The Settlers of Catan");
     boardGame.setPublisher("Klaus Teuber");
     boardGame.setYearPublished(1995);
     boardGame.setOutOfPrint(false);
 
-    return Flux.just(boardGame);
+    BoardGame boardGame2 = new BoardGame();
+    boardGame2.setId(2);
+    boardGame2.setName("Ticket to Ride");
+    boardGame2.setPublisher("Alan R. Moon");
+    boardGame2.setYearPublished(2004);
+    boardGame2.setOutOfPrint(false);
+
+    return Flux.just(boardGame, boardGame2);
   }
 
 }

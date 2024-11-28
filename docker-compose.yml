@@ -2,7 +2,8 @@ services:
   app:
     image: board-game:latest
     build:
-      context: .
+      context: ./board-game-store-service
       dockerfile: Dockerfile
+    container_name: board-game-store-service
     ports:
       - "8080:8080"
