@@ -3,12 +3,19 @@ package com.coding2themax.boardgame.persistance.service;
 import org.springframework.stereotype.Service;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
+import com.coding2themax.boardgame.persistance.repo.BoardGameRepository;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 public class SimpleRepositoryService implements BookInventoryService {
+
+  private final BoardGameRepository boardGameRepository;
+
+  public SimpleRepositoryService(BoardGameRepository boardGameRepository) {
+    this.boardGameRepository = boardGameRepository;
+  }
 
   @Override
   public Mono<BoardGame> addBoardGame(BoardGame boardGame) {
