@@ -5,6 +5,10 @@ spring:
     url: r2dbc:postgresql://db:5432/occupation-data
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 server:
-  port: 13000
+  port: 8080

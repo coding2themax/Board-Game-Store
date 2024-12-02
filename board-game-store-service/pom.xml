@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.boardgamestore</groupId>
+		<groupId>com.coding2themax.boardgame</groupId>
 		<artifactId>board-game-store-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
@@ -36,8 +36,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.coding2themax.boardgame</groupId>
-			<artifactId>board-game-persistance</artifactId>
+			<artifactId>board-game-persistance-spring-boot-starter</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
