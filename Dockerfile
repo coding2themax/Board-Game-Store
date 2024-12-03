@@ -1,3 +1,4 @@
+# Description: Dockerfile for the board-game-store-service builder and dependencies. Air tight container for the board-game-store-service
 FROM maven:3.9.9-eclipse-temurin-23-alpine AS DEPENDENCIES
 
 WORKDIR /opt/app

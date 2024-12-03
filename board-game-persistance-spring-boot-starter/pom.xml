@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.coding2themax.boardgame</groupId>
             <artifactId>board-game-persistance-spring-boot-autoconfigure</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

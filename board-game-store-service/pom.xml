@@ -11,7 +11,7 @@
 	<groupId>com.coding2themax.boardgame</groupId>
 	<artifactId>board-game-store-service</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>board-game-store</name>
+	<name>board-game-store-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>

@@ -1,6 +1,6 @@
 services:
   app:
-    image: board-game-mono
+    image: board-game-slim:latest
     container_name: board-game-store-service
     ports:
       - "8080:8080"

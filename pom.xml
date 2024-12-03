@@ -21,10 +21,10 @@
   </properties>
   <modules>
     <!-- List your modules here -->
-    <module>board-game-store-service</module>
     <module>board-game-persistance</module>
     <module>board-game-persistance-spring-boot-starter</module>
     <module>board-game-persistance-spring-boot-autoconfigure</module>
+    <module>board-game-store-service</module>
   </modules>
 
   <dependencyManagement>
