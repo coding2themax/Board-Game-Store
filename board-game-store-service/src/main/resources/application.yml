@@ -2,7 +2,7 @@ spring:
   application:
     name: board-game-store
   r2dbc:
-    url: r2dbc:postgresql://db:5432/occupation-data
+    url: ${DATABASE_HOST}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 management:

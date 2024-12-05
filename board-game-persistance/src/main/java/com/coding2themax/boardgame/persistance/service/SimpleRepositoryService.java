@@ -58,7 +58,8 @@ public class SimpleRepositoryService implements BookInventoryService {
     boardGame2.setYearPublished(2004);
     boardGame2.setOutOfPrint(false);
 
-    return Flux.just(boardGame, boardGame2);
+    // return Flux.just(boardGame, boardGame2);
+    return boardGameRepository.findAll();
   }
 
 }
