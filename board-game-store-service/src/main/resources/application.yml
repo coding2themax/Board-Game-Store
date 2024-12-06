@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: board-game-store
+  r2dbc:
+    url: ${DATABASE_HOST}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8080
