@@ -14,19 +14,26 @@ CREATE TABLE board_game_store.board_game (
   age_recommendation INT
 );
 
-CREATE TABLE board_game_store.publishers (
-  id SERIAL PRIMARY KEY,
+CREATE TABLE board_game_store.publisher (
+  publisher_id NUMERIC(3) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   country VARCHAR(100)
 );
 
-CREATE TABLE board_game_store.genres (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL
+CREATE TABLE board_game_store.genre (
+  genre_id NUMERIC(3) PRIMARY KEY,
+  genre_name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE board_game_store.game_genres (
-  game_id INT REFERENCES board_games(id),
-  genre_id INT REFERENCES genres(id),
-  PRIMARY KEY (game_id, genre_id)
+CREATE TABLE board_game_store.game_genre (
+  game_genre_id NUMERIC(3) PRIMARY KEY,
+  game_id NUMERIC(3) NOT NULL,
+  genre_id NUMERIC(3) NOT NULL,
+  constraint fk_game_id foreign key (game_id) references board_game_store.board_game(board_id),
+  constraint fk_genre_id foreign key (genre_id) references board_game_store.genre(genre_id)
+
+
 );
+
+insert into board_game_store.board_game (board_id, board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_minutes, age_recommendation) values (1, 'Catan', 'Catan Studio', 1995, 'Strategy', 3, 4, false, 60, 10);
+insert into board_game_store.board_game (board_id, board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_minutes, age_recommendation) values (2, 'Ticket to Ride', 'Days of Wonder', 2004, 'Strategy', 2, 5, false, 60, 8); 
