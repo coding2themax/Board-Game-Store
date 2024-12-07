@@ -36,4 +36,4 @@ CREATE TABLE board_game_store.game_genre (
 );
 
 insert into board_game_store.board_game (board_id, board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_minutes, age_recommendation) values (1, 'Catan', 'Catan Studio', 1995, 'Strategy', 3, 4, false, 60, 10);
-insert into board_game_store.board_game (board_id, board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_minutes, age_recommendation) values (2, 'Ticket to Ride', 'Days of Wonder', 2004, 'Strategy', 2, 5, false, 60, 8); 
+insert into board_game_store.board_game (board_id, board_name, publisher, release_year, genre, gitmin_players, max_players, out_of_print, play_time_minutes, age_recommendation) values (2, 'Ticket to Ride', 'Days of Wonder', 2004, 'Strategy', 2, 5, false, 60, 8); 
