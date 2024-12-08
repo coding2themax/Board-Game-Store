@@ -25,3 +25,5 @@ replay_pid*
 .vscode/settings.json
 .vscode/launch.json
 .env
+.DS_Store
+board-game-store-service/.DS_Store
