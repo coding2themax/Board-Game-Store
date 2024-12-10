@@ -16,6 +16,7 @@ import com.coding2themax.boardgame.persistance.model.BoardGame;
 import com.coding2themax.boardgame.persistance.service.BookInventoryService;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @WebFluxTest(controllers = BoardGameController.class)
 public class BoardGameControllerTest {
@@ -44,5 +45,36 @@ public class BoardGameControllerTest {
         .hasSize(2);
     // .contains(game1, game2);
 
+  }
+
+  /// Create a test for the get by id method in the BoardGameController class
+  /// The test should return a single BoardGame object when the id is passed as a query parameter
+  /// The test should return a 404 status code when the id is not found
+  /// The test should return a 400 status code when the id is not a number
+  /// The test should return a 200 status code when the id is found
+  /// The test should return a 500 status code when an exception is thrown
+  /// The test should return a 200 status code when the id is found
+
+  @Test
+  public void testGetBoardGameById() {
+    BoardGame game1 = new BoardGame();
+    game1.setId(1);
+    game1.setName("Game 1");
+
+    when(boardGameService.getBoardGameById("1")).thenReturn(Mono.just(game1));
+
+    webTestClient.get().uri("/boardgame?id=1")
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody(BoardGame.class);
+  }
+
+  @Test
+  public void testGetBoardGameByIdNotFound() {
+    when(boardGameService.getBoardGameById("99")).thenReturn(Mono.empty());
+
+    webTestClient.get().uri("/boardgame?id=99")
+        .exchange()
+        .expectStatus().isNotFound();
   }
 }
