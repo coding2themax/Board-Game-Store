@@ -7,6 +7,8 @@ import com.coding2themax.boardgame.persistance.model.BoardGame;
 import com.coding2themax.boardgame.persistance.service.BookInventoryService;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class BoardGameController {
@@ -21,4 +23,10 @@ public class BoardGameController {
   Flux<BoardGame> getAllBoardGames() {
     return boardGameService.getAllBoardGames();
   }
+
+  @GetMapping("/boardgame")
+  Mono<BoardGame> getBoardGameById(@RequestParam String id) {
+    return boardGameService.getBoardGameById(id);
+  }
+
 }

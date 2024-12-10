@@ -1,11 +1,13 @@
 package com.coding2themax.boardgame.persistance.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table(value = "board_game", schema = "board_game_store")
-public class BoardGame {
+public class BoardGame implements Persistable<Integer> {
   @Id()
   @Column("board_id")
   private Integer id;
@@ -14,9 +16,9 @@ public class BoardGame {
   @Column("publisher")
   private String publisher;
   @Column("release_year")
-  private int yearPublished;
+  private Integer yearPublished;
   @Column("out_of_print")
-  private boolean outOfPrint;
+  private Boolean outOfPrint;
   @Column("max_players")
   private Integer minPlayerCount;
   @Column("min_players")
@@ -25,6 +27,9 @@ public class BoardGame {
   private Integer playingTime;
   @Column("age_recommendation")
   private Integer ageRating;
+
+  @Transient
+  private boolean isNewBoardGame;
 
   public Integer getId() {
     return id;
@@ -82,7 +87,7 @@ public class BoardGame {
     this.publisher = publisher;
   }
 
-  public int getYearPublished() {
+  public Integer getYearPublished() {
     return yearPublished;
   }
 
@@ -90,11 +95,21 @@ public class BoardGame {
     this.yearPublished = yearPublished;
   }
 
-  public boolean isOutOfPrint() {
+  public Boolean isOutOfPrint() {
     return outOfPrint;
   }
 
   public void setOutOfPrint(boolean outOfPrint) {
     this.outOfPrint = outOfPrint;
+  }
+
+  @Override
+  public boolean isNew() {
+    return this.isNewBoardGame || id == null;
+  }
+
+  public BoardGame setAsNew() {
+    this.isNewBoardGame = true;
+    return this;
   }
 }

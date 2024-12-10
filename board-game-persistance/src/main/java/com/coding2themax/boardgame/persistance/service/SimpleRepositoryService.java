@@ -1,5 +1,7 @@
 package com.coding2themax.boardgame.persistance.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
@@ -19,47 +21,40 @@ public class SimpleRepositoryService implements BookInventoryService {
 
   @Override
   public Mono<BoardGame> addBoardGame(BoardGame boardGame) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'addBoardGame'");
+    return saveBoardGameOrUpdate(boardGame);
   }
 
   @Override
-  public Mono<BoardGame> updateBoardGame(BoardGame boardGame) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateBoardGame'");
-  }
-
-  @Override
-  public Mono<Void> deleteBoardGameById(String id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteBoardGameById'");
+  public Mono<BoardGame> updateBoardGame(BoardGame boardGame, Integer id) {
+    boardGame.setId(id);
+    return saveBoardGameOrUpdate(boardGame);
   }
 
   @Override
   public Mono<BoardGame> getBoardGameById(String id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getBoardGameById'");
+    return boardGameRepository.findById(Integer.valueOf(id));
   }
 
   @Override
   public Flux<BoardGame> getAllBoardGames() {
-
-    BoardGame boardGame = new BoardGame();
-    boardGame.setId(1);
-    boardGame.setName("Catan - The Settlers of Catan");
-    boardGame.setPublisher("Klaus Teuber");
-    boardGame.setYearPublished(1995);
-    boardGame.setOutOfPrint(false);
-
-    BoardGame boardGame2 = new BoardGame();
-    boardGame2.setId(2);
-    boardGame2.setName("Ticket to Ride");
-    boardGame2.setPublisher("Alan R. Moon");
-    boardGame2.setYearPublished(2004);
-    boardGame2.setOutOfPrint(false);
-
-    // return Flux.just(boardGame, boardGame2);
     return boardGameRepository.findAll();
   }
 
+  private Mono<BoardGame> saveBoardGameOrUpdate(BoardGame boardGame) {
+    // return boardGameRepository.save(boardGame);
+    Integer id = Optional.ofNullable(boardGame.getId()).orElse(0);
+    return this.boardGameRepository.findById(id).flatMap(b -> {
+      b.setName(null != boardGame.getName() ? boardGame.getName() : b.getName());
+      b.setPublisher(null != boardGame.getPublisher() ? boardGame.getPublisher() : b.getPublisher());
+      b.setYearPublished(null != boardGame.getYearPublished() ? boardGame.getYearPublished() : b.getYearPublished());
+      b.setOutOfPrint(null != boardGame.isOutOfPrint() ? boardGame.isOutOfPrint() : b.isOutOfPrint());
+      b.setMinPlayerCount(
+          null != boardGame.getMinPlayerCount() ? boardGame.getMinPlayerCount() : b.getMinPlayerCount());
+      b.setMaxPlayerCount(
+          null != boardGame.getMaxPlayerCount() ? boardGame.getMaxPlayerCount() : b.getMaxPlayerCount());
+      b.setAgeRating(null != boardGame.getAgeRating() ? boardGame.getAgeRating() : b.getAgeRating());
+      b.setPlayingTime(null != boardGame.getPlayingTime() ? boardGame.getPlayingTime() : b.getPlayingTime());
+      return this.boardGameRepository.save(b);
+    });
+  }
 }
