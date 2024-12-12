@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
 import com.coding2themax.boardgame.persistance.service.BookInventoryService;
+import com.coding2themax.boardgame.store.exception.BoardGameNotFoundException;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,7 +27,8 @@ public class BoardGameController {
 
   @GetMapping("/boardgame")
   Mono<BoardGame> getBoardGameById(@RequestParam String id) {
-    return boardGameService.getBoardGameById(id);
+    return boardGameService.getBoardGameById(id)
+        .switchIfEmpty(Mono.error(new BoardGameNotFoundException("Board game not found")));
   }
 
 }
