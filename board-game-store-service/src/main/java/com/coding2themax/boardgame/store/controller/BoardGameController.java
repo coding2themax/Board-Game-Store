@@ -7,6 +7,7 @@ import com.coding2themax.boardgame.persistance.model.BoardGame;
 import com.coding2themax.boardgame.persistance.service.BookInventoryService;
 import com.coding2themax.boardgame.store.exception.BoardGameNotFoundException;
 
+import jakarta.validation.constraints.Min;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +27,9 @@ public class BoardGameController {
   }
 
   @GetMapping("/boardgame")
-  Mono<BoardGame> getBoardGameById(@RequestParam String id) {
-    return boardGameService.getBoardGameById(id)
+  Mono<BoardGame> getBoardGameById(@RequestParam(value = "id") int id) {
+    String idString = Integer.toString(id);
+    return boardGameService.getBoardGameById(idString)
         .switchIfEmpty(Mono.error(new BoardGameNotFoundException("Board game not found")));
   }
 

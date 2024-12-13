@@ -73,4 +73,11 @@ public class BoardGameControllerTest {
         .exchange()
         .expectStatus().isNotFound();
   }
+
+  @Test
+  public void testGetBoardGameByIdBadRequest() {
+    webTestClient.get().uri("/boardgame?id=abc")
+        .exchange()
+        .expectStatus().isBadRequest();
+  }
 }
