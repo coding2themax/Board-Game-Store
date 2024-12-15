@@ -80,4 +80,19 @@ public class BoardGameControllerTest {
         .exchange()
         .expectStatus().isBadRequest();
   }
+
+  @Test
+  void testAddBoardGame() {
+    BoardGame game1 = new BoardGame();
+    game1.setId(1);
+    game1.setName("Game 1");
+
+    when(boardGameService.addBoardGame(game1)).thenReturn(Mono.just(game1));
+
+    webTestClient.post().uri("/boardgame")
+        .bodyValue(game1)
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody(BoardGame.class);
+  }
 }
