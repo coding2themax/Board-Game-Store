@@ -2,6 +2,7 @@ package com.coding2themax.boardgame.store.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,11 @@ public class BoardGameController {
   @PostMapping("/boardgame")
   Mono<BoardGame> addBoardGame(@RequestBody @Valid BoardGame boardGame) {
     return boardGameService.addBoardGame(boardGame);
+  }
+
+  @PutMapping("/boardgame")
+  Mono<BoardGame> updateBoardGame(@RequestBody @Valid BoardGame boardGame, @RequestParam(value = "id") int id) {
+    return boardGameService.updateBoardGame(boardGame, id);
   }
 
 }

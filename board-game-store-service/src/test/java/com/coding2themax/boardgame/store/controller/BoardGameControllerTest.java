@@ -25,7 +25,7 @@ public class BoardGameControllerTest {
   private WebTestClient webTestClient;
 
   @Test
-  public void testGetAllBoardGames() {
+  void testGetAllBoardGames() {
     BoardGame game1 = new BoardGame();
     game1.setId(1);
     game1.setName("Game 1");
@@ -52,7 +52,7 @@ public class BoardGameControllerTest {
   /// The test should return a 200 status code when the id is found
 
   @Test
-  public void testGetBoardGameById() {
+  void testGetBoardGameById() {
     BoardGame game1 = new BoardGame();
     game1.setId(1);
     game1.setName("Game 1");
@@ -66,7 +66,7 @@ public class BoardGameControllerTest {
   }
 
   @Test
-  public void testGetBoardGameByIdNotFound() {
+  void testGetBoardGameByIdNotFound() {
     when(boardGameService.getBoardGameById("99")).thenReturn(Mono.empty());
 
     webTestClient.get().uri("/boardgame?id=99")
@@ -75,7 +75,7 @@ public class BoardGameControllerTest {
   }
 
   @Test
-  public void testGetBoardGameByIdBadRequest() {
+  void testGetBoardGameByIdBadRequest() {
     webTestClient.get().uri("/boardgame?id=abc")
         .exchange()
         .expectStatus().isBadRequest();
@@ -90,6 +90,21 @@ public class BoardGameControllerTest {
     when(boardGameService.addBoardGame(game1)).thenReturn(Mono.just(game1));
 
     webTestClient.post().uri("/boardgame")
+        .bodyValue(game1)
+        .exchange()
+        .expectStatus().isOk()
+        .expectBody(BoardGame.class);
+  }
+
+  @Test
+  void testUpdateBoardGame() {
+    BoardGame game1 = new BoardGame();
+    game1.setId(1);
+    game1.setName("Game 1");
+
+    when(boardGameService.updateBoardGame(game1, 1)).thenReturn(Mono.just(game1));
+
+    webTestClient.put().uri("/boardgame?id=1")
         .bodyValue(game1)
         .exchange()
         .expectStatus().isOk()
