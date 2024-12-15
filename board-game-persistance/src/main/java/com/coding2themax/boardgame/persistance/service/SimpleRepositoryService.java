@@ -25,14 +25,14 @@ public class SimpleRepositoryService implements BookInventoryService {
   }
 
   @Override
-  public Mono<BoardGame> updateBoardGame(BoardGame boardGame, Integer id) {
+  public Mono<BoardGame> updateBoardGame(BoardGame boardGame, Long id) {
     boardGame.setId(id);
     return saveBoardGameOrUpdate(boardGame);
   }
 
   @Override
   public Mono<BoardGame> getBoardGameById(String id) {
-    return boardGameRepository.findById(Integer.valueOf(id));
+    return boardGameRepository.findById(Long.valueOf(id));
   }
 
   @Override
@@ -42,7 +42,7 @@ public class SimpleRepositoryService implements BookInventoryService {
 
   private Mono<BoardGame> saveBoardGameOrUpdate(BoardGame boardGame) {
     // return boardGameRepository.save(boardGame);
-    Integer id = Optional.ofNullable(boardGame.getId()).orElse(0);
+    Long id = Optional.ofNullable(boardGame.getId()).orElse(0l);
     return this.boardGameRepository.findById(id).flatMap(b -> {
       b.setName(null != boardGame.getName() ? boardGame.getName() : b.getName());
       b.setPublisher(null != boardGame.getPublisher() ? boardGame.getPublisher() : b.getPublisher());

@@ -8,7 +8,7 @@ public class BoardGameTest {
   @Test
   public void testGettersAndSetters() {
     BoardGame game = new BoardGame();
-    game.setId(1);
+    game.setId(1l);
     game.setName("Catan");
     game.setPublisher("Kosmos");
     game.setYearPublished(1995);
@@ -48,7 +48,7 @@ public class BoardGameTest {
     BoardGame game = new BoardGame();
     assertTrue(game.isNew());
 
-    game.setId(1);
+    game.setId(1l);
     assertFalse(game.isNew());
 
     game.setAsNew();

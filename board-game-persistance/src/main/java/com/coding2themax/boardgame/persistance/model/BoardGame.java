@@ -7,10 +7,10 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table(value = "board_game", schema = "board_game_store")
-public class BoardGame implements Persistable<Integer> {
+public class BoardGame implements Persistable<Long> {
   @Id()
   @Column("board_id")
-  private Integer id;
+  private Long id;
   @Column("board_name")
   private String name;
   @Column("publisher")
@@ -31,11 +31,11 @@ public class BoardGame implements Persistable<Integer> {
   @Transient
   private boolean isNewBoardGame;
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
