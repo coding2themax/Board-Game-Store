@@ -9,7 +9,7 @@ public interface BookInventoryService {
 
   Mono<BoardGame> addBoardGame(BoardGame boardGame);
 
-  Mono<BoardGame> updateBoardGame(BoardGame boardGame, Integer id);
+  Mono<BoardGame> updateBoardGame(BoardGame boardGame, Long id);
 
   Mono<BoardGame> getBoardGameById(String id);
 

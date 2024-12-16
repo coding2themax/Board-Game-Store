@@ -42,7 +42,7 @@ public class BoardGameController {
   }
 
   @PutMapping("/boardgame")
-  Mono<BoardGame> updateBoardGame(@RequestBody @Valid BoardGame boardGame, @RequestParam(value = "id") int id) {
+  Mono<BoardGame> updateBoardGame(@RequestBody @Valid BoardGame boardGame, @RequestParam(value = "id") long id) {
     return boardGameService.updateBoardGame(boardGame, id);
   }
 

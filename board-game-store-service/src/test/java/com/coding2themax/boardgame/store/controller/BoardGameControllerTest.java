@@ -27,11 +27,11 @@ public class BoardGameControllerTest {
   @Test
   void testGetAllBoardGames() {
     BoardGame game1 = new BoardGame();
-    game1.setId(1);
+    game1.setId(1l);
     game1.setName("Game 1");
 
     BoardGame game2 = new BoardGame();
-    game2.setId(2);
+    game2.setId(2l);
     game2.setName("Game 2");
     when(boardGameService.getAllBoardGames()).thenReturn(Flux.just(game1, game2));
 
@@ -54,7 +54,7 @@ public class BoardGameControllerTest {
   @Test
   void testGetBoardGameById() {
     BoardGame game1 = new BoardGame();
-    game1.setId(1);
+    game1.setId(1l);
     game1.setName("Game 1");
 
     when(boardGameService.getBoardGameById("1")).thenReturn(Mono.just(game1));
@@ -84,7 +84,7 @@ public class BoardGameControllerTest {
   @Test
   void testAddBoardGame() {
     BoardGame game1 = new BoardGame();
-    game1.setId(1);
+    game1.setId(1l);
     game1.setName("Game 1");
 
     when(boardGameService.addBoardGame(game1)).thenReturn(Mono.just(game1));
@@ -99,10 +99,10 @@ public class BoardGameControllerTest {
   @Test
   void testUpdateBoardGame() {
     BoardGame game1 = new BoardGame();
-    game1.setId(1);
+    game1.setId(1l);
     game1.setName("Game 1");
 
-    when(boardGameService.updateBoardGame(game1, 1)).thenReturn(Mono.just(game1));
+    when(boardGameService.updateBoardGame(game1, 1l)).thenReturn(Mono.just(game1));
 
     webTestClient.put().uri("/boardgame?id=1")
         .bodyValue(game1)

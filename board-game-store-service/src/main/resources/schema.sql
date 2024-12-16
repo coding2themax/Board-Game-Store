@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS board_game_store;
 
 
 CREATE TABLE board_game_store.board_game (
-  board_id NUMERIC(3) PRIMARY KEY,
+  board_id SERIAL PRIMARY KEY,
   board_name VARCHAR(255) NOT NULL,
   publisher VARCHAR(255),
   release_year NUMERIC(4),
@@ -10,7 +10,7 @@ CREATE TABLE board_game_store.board_game (
   min_players numeric(2),
   max_players numeric(2),
   out_of_print BOOLEAN,
-  play_time_minutes INT,
+  play_time_in_minutes INT,
   age_recommendation INT
 );
 

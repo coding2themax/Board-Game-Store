@@ -31,7 +31,7 @@ public class SimpleRepositoryServiceTest {
   public void setUp() {
     MockitoAnnotations.openMocks(this);
     boardGame = new BoardGame();
-    boardGame.setId(1);
+    boardGame.setId(1l);
     boardGame.setName("Catan");
     boardGame.setPublisher("Kosmos");
     boardGame.setYearPublished(1995);
@@ -46,7 +46,7 @@ public class SimpleRepositoryServiceTest {
   public void testAddBoardGame() {
 
     Assertions.assertFalse(boardGame.isNew());
-    when(boardGameRepository.findById(1)).thenReturn(Mono.empty());
+    when(boardGameRepository.findById(1l)).thenReturn(Mono.empty());
 
     when(boardGameRepository.save(any(BoardGame.class))).thenReturn(Mono.just(boardGame));
 
@@ -59,10 +59,10 @@ public class SimpleRepositoryServiceTest {
 
   @Test
   public void testUpdateBoardGame() {
-    when(boardGameRepository.findById(1)).thenReturn(Mono.just(boardGame));
+    when(boardGameRepository.findById(1l)).thenReturn(Mono.just(boardGame));
     when(boardGameRepository.save(any(BoardGame.class))).thenReturn(Mono.just(boardGame));
 
-    Mono<BoardGame> result = simpleRepositoryService.updateBoardGame(boardGame, 1);
+    Mono<BoardGame> result = simpleRepositoryService.updateBoardGame(boardGame, 1l);
 
     StepVerifier.create(result)
         .expectNext(boardGame)
@@ -71,11 +71,11 @@ public class SimpleRepositoryServiceTest {
 
   @Test
   public void testUpdateBoardGameNullVal() {
-    when(boardGameRepository.findById(1)).thenReturn(Mono.just(boardGame));
+    when(boardGameRepository.findById(1l)).thenReturn(Mono.just(boardGame));
     when(boardGameRepository.save(any(BoardGame.class))).thenReturn(Mono.just(boardGame));
 
     BoardGame boardGameEmpty = new BoardGame();
-    Mono<BoardGame> result = simpleRepositoryService.updateBoardGame(boardGameEmpty, 1);
+    Mono<BoardGame> result = simpleRepositoryService.updateBoardGame(boardGameEmpty, 1l);
 
     StepVerifier.create(result)
         .expectNext(boardGame)
@@ -84,7 +84,7 @@ public class SimpleRepositoryServiceTest {
 
   @Test
   public void testGetBoardGameById() {
-    when(boardGameRepository.findById(1)).thenReturn(Mono.just(boardGame));
+    when(boardGameRepository.findById(1l)).thenReturn(Mono.just(boardGame));
 
     Mono<BoardGame> result = simpleRepositoryService.getBoardGameById("1");
 
