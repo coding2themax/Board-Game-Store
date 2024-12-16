@@ -1,6 +1,7 @@
 package com.coding2themax.boardgame.persistance.service;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class SimpleRepositoryService implements BookInventoryService {
 
+  private static final Logger LOGGER = Logger.getLogger(SimpleRepositoryService.class.getName());
   private final BoardGameRepository boardGameRepository;
 
   public SimpleRepositoryService(BoardGameRepository boardGameRepository) {
@@ -41,7 +43,8 @@ public class SimpleRepositoryService implements BookInventoryService {
   }
 
   private Mono<BoardGame> saveBoardGameOrUpdate(BoardGame boardGame) {
-    // return boardGameRepository.save(boardGame);
+    LOGGER.info(null != boardGame.getId() ? "Updating board game with id: " + boardGame.getId()
+        : "Adding new board game");
     Long id = Optional.ofNullable(boardGame.getId()).orElse(0l);
     return this.boardGameRepository.findById(id).flatMap(b -> {
       b.setName(null != boardGame.getName() ? boardGame.getName() : b.getName());
@@ -55,6 +58,6 @@ public class SimpleRepositoryService implements BookInventoryService {
       b.setAgeRating(null != boardGame.getAgeRating() ? boardGame.getAgeRating() : b.getAgeRating());
       b.setPlayingTime(null != boardGame.getPlayingTime() ? boardGame.getPlayingTime() : b.getPlayingTime());
       return this.boardGameRepository.save(b);
-    });
+    }).switchIfEmpty(this.boardGameRepository.save(boardGame));
   }
 }
