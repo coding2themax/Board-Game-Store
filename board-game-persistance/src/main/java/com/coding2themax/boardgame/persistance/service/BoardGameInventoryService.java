@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
 
-public interface BookInventoryService {
+public interface BoardGameInventoryService {
 
   Mono<BoardGame> addBoardGame(BoardGame boardGame);
 
