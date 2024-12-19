@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
-import com.coding2themax.boardgame.persistance.service.BookInventoryService;
+import com.coding2themax.boardgame.persistance.service.BoardGameInventoryService;
 import com.coding2themax.boardgame.store.exception.BoardGameNotFoundException;
 
 import jakarta.validation.Valid;
@@ -18,9 +18,9 @@ import reactor.core.publisher.Mono;
 @RestController
 public class BoardGameController {
 
-  private final BookInventoryService boardGameService;
+  private final BoardGameInventoryService boardGameService;
 
-  public BoardGameController(BookInventoryService boardGameService) {
+  public BoardGameController(BoardGameInventoryService boardGameService) {
     this.boardGameService = boardGameService;
   }
 
