@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class SimpleRepositoryService implements BookInventoryService {
+public class SimpleRepositoryService implements BoardGameInventoryService {
 
   private static final Logger LOGGER = Logger.getLogger(SimpleRepositoryService.class.getName());
   private final BoardGameRepository boardGameRepository;

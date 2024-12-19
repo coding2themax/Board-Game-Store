@@ -10,7 +10,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.coding2themax.boardgame.persistance.model.BoardGame;
-import com.coding2themax.boardgame.persistance.service.BookInventoryService;
+import com.coding2themax.boardgame.persistance.service.BoardGameInventoryService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class BoardGameControllerTest {
 
   @MockitoBean
-  private BookInventoryService boardGameService;
+  private BoardGameInventoryService boardGameService;
 
   @Autowired
   private WebTestClient webTestClient;
