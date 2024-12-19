@@ -13,4 +13,6 @@ public interface GenreService {
 
   Mono<Genre> saveReactive(Genre genre);
 
+  Mono<Genre> updateReactive(Long id, Genre genre);
+
 }

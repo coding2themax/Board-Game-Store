@@ -38,4 +38,10 @@ public class ReactiveGenreService implements GenreService {
       return genreRepository.save(g);
     });
   }
+
+  @Override
+  public Mono<Genre> updateReactive(Long id, Genre genre) {
+    genre.setId(id);
+    return saveGenreOrUpdate(genre);
+  }
 }
