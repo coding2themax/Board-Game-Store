@@ -26,7 +26,7 @@ CREATE TABLE board_game_store.genres (
 );
 
 CREATE TABLE board_game_store.game_genres (
-  game_id INT REFERENCES board_games(id),
-  genre_id INT REFERENCES genres(id),
+  game_id INT REFERENCES board_game_store.board_game(board_id),
+  genre_id INT REFERENCES board_game_store.genres(id),
   PRIMARY KEY (game_id, genre_id)
 );
