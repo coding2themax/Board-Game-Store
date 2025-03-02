@@ -23,7 +23,7 @@ COPY board-game-store-service/src /opt/app/board-game-store-service/src
 
 RUN mvn -B -e clean install -DskipTests
 
-FROM openjdk:23-slim
+FROM openjdk:25-slim
 
 WORKDIR /opt/app
 #COPY --from=BUILDER /opt/app/api/target/*.jar /app.jar
