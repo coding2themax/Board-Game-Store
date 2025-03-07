@@ -1,5 +1,7 @@
 package com.coding2themax.boardgame.store.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class GenreController {
-
+  Logger logger = LoggerFactory.getLogger(GenreController.class);
   private final GenreService genreService;
 
   public GenreController(GenreService genreService) {
@@ -32,6 +34,7 @@ public class GenreController {
   @PostMapping("/genres")
   @ResponseBody
   public Mono<Genre> createGenre(@RequestBody Genre genre) {
+    logger.info("Creating genre: {}", genre);
     return genreService.saveReactive(genre);
   }
 

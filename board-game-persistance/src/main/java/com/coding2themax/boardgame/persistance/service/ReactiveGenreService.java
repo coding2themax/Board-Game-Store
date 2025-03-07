@@ -34,9 +34,9 @@ public class ReactiveGenreService implements GenreService {
 
   private Mono<Genre> saveGenreOrUpdate(Genre genre) {
     return genreRepository.findById(genre.getId()).flatMap(g -> {
-      g.setName(null != genre.getName() ? genre.getName() : g.getName());
+      g.setName(genre.getName());
       return genreRepository.save(g);
-    });
+    }).switchIfEmpty(this.genreRepository.save(genre));
   }
 
   @Override
