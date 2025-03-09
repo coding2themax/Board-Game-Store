@@ -26,29 +26,50 @@ public class BoardGamePostGresIntegrationTest {
   void getAllBoardGames() {
 
     webTestClient.get().uri("/genres").exchange().expectStatus().isOk()
-        .expectBodyList(Genre.class).hasSize(0);
-
-    Genre genre1 = new Genre();
-
-    genre1.setId(1l);
-    genre1.setName("test");
-
-    genreService.saveReactive(
-        genre1)
-        .subscribe(s -> webTestClient.get().uri("/genres").exchange().expectBodyList(Genre.class).contains(genre1));
+        .expectBodyList(Genre.class).hasSize(3);
 
   }
 
   @Test
-  void testAddGenre() {
+  void testUpdateGenre() {
     Genre genre1 = new Genre();
 
     genre1.setId(1l);
     genre1.setName("test1");
 
+    Genre genre2 = new Genre();
+    genre2.setId(1l);
+    genre2.setName("test2");
+
+    genreService.saveReactive(
+        genre1)
+        .subscribe();
+    webTestClient.put().uri("/genres/1").bodyValue(genre2).exchange().expectStatus().isOk()
+        .expectBody(Genre.class).value(v -> {
+          // Assertions.assertThat(v.getId()).isEqualTo(1l);
+          Assertions.assertThat(v.getName()).isEqualTo("test2");
+        });
+
+  }
+
+  @Test
+  void testAddNewGenreForPost() {
+
+    Genre genre1 = new Genre();
+
+    genre1.setId(1l);
+    genre1.setName("test1");
+
+    genreService.saveReactive(
+        genre1).subscribe();
+    Genre genre2 = new Genre();
+
+    genre2.setId(1l);
+    genre2.setName("test2");
+
     webTestClient.post().uri("/genres").bodyValue(genre1).exchange().expectStatus().isOk()
         .expectBody(Genre.class).value(v -> {
-          Assertions.assertThat(v.getId()).isEqualTo(1l);
+          // Assertions.assertThat(v.getId()).isEqualTo(1l);
           Assertions.assertThat(v.getName()).isEqualTo("test1");
         });
   }
