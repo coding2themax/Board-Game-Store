@@ -65,12 +65,22 @@ public class BoardGamePostGresIntegrationTest {
     Genre genre2 = new Genre();
 
     genre2.setId(1l);
-    genre2.setName("test2");
 
     webTestClient.post().uri("/genres").bodyValue(genre1).exchange().expectStatus().isOk()
         .expectBody(Genre.class).value(v -> {
           // Assertions.assertThat(v.getId()).isEqualTo(1l);
           Assertions.assertThat(v.getName()).isEqualTo("test1");
+        });
+
+    genre2.setName("testupdate");
+
+    Long genreId = 1L;
+
+    webTestClient.put().uri("/genres/{id}", genreId).bodyValue(genre2).exchange().expectStatus().isOk()
+        .expectBody(Genre.class).value(v -> {
+          Assertions.assertThat(v.getId()).isEqualTo(1l);
+          Assertions.assertThat(v.getName()).isEqualTo("testupdate");
+
         });
   }
 
