@@ -9,6 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(value = "genres", schema = "board_game_store")
 public class Genre implements Persistable<Long> {
   @Id()
+  @Column("id")
   private Long id;
   @Column
   private String name;

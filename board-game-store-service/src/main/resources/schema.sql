@@ -25,8 +25,10 @@ CREATE TABLE board_game_store.genres (
   name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE board_game_store.game_genres (
-  game_id INT REFERENCES board_games(id),
-  genre_id INT REFERENCES genres(id),
-  PRIMARY KEY (game_id, genre_id)
-);
+insert into board_game_store.genres (name) values ('Strategy');
+insert into board_game_store.genres (name) values ('Family');
+insert into board_game_store.genres (name) values ('Party');
+
+insert into board_game_store.board_game ( board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_in_minutes, age_recommendation) values ( 'Catan', 'Catan Studio', 1995, 'Strategy', 3, 4, false, 60, 10);
+insert into board_game_store.board_game ( board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_in_minutes, age_recommendation) values ( 'Catan', 'Catan Studio', 1995, 'Strategy', 3, 4, false, 60, 10);
+insert into board_game_store.board_game ( board_name, publisher, release_year, genre, min_players, max_players, out_of_print, play_time_in_minutes, age_recommendation) values ( 'Ticket to Ride', 'Days of Wonder', 2004, 'Strategy', 2, 5, false, 60, 8); 
